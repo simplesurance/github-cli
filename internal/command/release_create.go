@@ -28,8 +28,8 @@ func init() {
 	releaseCreateCmd.Flags().StringVarP(&releaseCreateFlags.targetRef, "target", "", "", "Target branch or commit ID where the tag is created. If the tag already exist, it's ignored")
 	releaseCreateCmd.Flags().StringVarP(&releaseCreateFlags.name, "name", "", "", "The name of the release.")
 	releaseCreateCmd.Flags().StringVarP(&releaseCreateFlags.description, "description", "", "", "Description of the release")
-	releaseCreateCmd.Flags().BoolVarP(&releaseCreateFlags.prerelease, "prerelease", "", false, "Indicated if the maintainer can modify the PR")
-	releaseCreateCmd.Flags().BoolVarP(&releaseCreateFlags.draft, "draft", "", false, "Create the PR as draft")
+	releaseCreateCmd.Flags().BoolVarP(&releaseCreateFlags.prerelease, "prerelease", "", false, "Identify the release as a prerelease")
+	releaseCreateCmd.Flags().BoolVarP(&releaseCreateFlags.draft, "draft", "", false, "Create a draft (unpublished) release")
 }
 
 func releaseCreate(cmd *cobra.Command, args []string) {

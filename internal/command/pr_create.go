@@ -28,7 +28,7 @@ func init() {
 	prCreateCmd.Flags().StringVarP(&prCreateFlags.branch, "branch", "", "", "Branch to merge (required)")
 	prCreateCmd.Flags().StringVarP(&prCreateFlags.baseBranch, "base-branch", "", "", "Name of the branch to merge into (required)")
 	prCreateCmd.Flags().StringVarP(&prCreateFlags.body, "description", "", "", "Pull-Request description")
-	prCreateCmd.Flags().BoolVarP(&prCreateFlags.maintainerCanModify, "maintainer-can-modify", "m", true, "Indicated if the maintainer can modify the PR")
+	prCreateCmd.Flags().BoolVarP(&prCreateFlags.maintainerCanModify, "maintainer-can-modify", "m", true, "Indicates if the maintainer can modify the PR")
 	prCreateCmd.Flags().BoolVarP(&prCreateFlags.draft, "draft", "", false, "Create the PR as draft")
 }
 
