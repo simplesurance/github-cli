@@ -1,7 +1,7 @@
 # Binaries for programs and plugins
 dist/
 docker/files
-/mkchangelog
+/github-cli
 *.exe
 *.dll
 *.so
