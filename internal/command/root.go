@@ -28,8 +28,6 @@ type generalFlags struct {
 
 	repository string
 	oAuthToken string
-
-	username string // TODO: is username needed?? Seems not!
 }
 
 var rootFlags generalFlags
@@ -44,7 +42,6 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVarP(&rootFlags.repository, "repository", "r", "", "Github repository, format <OWNER/REPOSITORY>")
 	rootCmd.PersistentFlags().StringVarP(&rootFlags.oAuthToken, "token", "p", "", "Github OAuth token for authentication")
-	rootCmd.PersistentFlags().StringVarP(&rootFlags.username, "username", "u", "", "Github username for authentication")
 
 }
 
