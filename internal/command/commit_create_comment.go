@@ -2,6 +2,7 @@ package command
 
 import (
 	"os"
+	"simplesurance/github-cli/internal/command/flag"
 	"strconv"
 
 	"github.com/google/go-github/v28/github"
@@ -16,7 +17,7 @@ var commitCreateCommentCmd = &cobra.Command{
 
 var commitCreateCommentFlags struct {
 	commit        string
-	comment       string
+	commentFile   flag.FilePathFlag
 	relFilePath   string
 	diffLineIndex string
 }
@@ -24,7 +25,7 @@ var commitCreateCommentFlags struct {
 func init() {
 	commitCmd.AddCommand(commitCreateCommentCmd)
 
-	commitCreateCommentCmd.Flags().StringVarP(&commitCreateCommentFlags.comment, "comment", "", "", "The contents of the comment (required)")
+	commitCreateCommentCmd.Flags().VarP(&commitCreateCommentFlags.commentFile, "comment-file", "", "Path to a file containing the comment (required). Pass - to read from STDIN. (required)")
 	commitCreateCommentCmd.Flags().StringVarP(&commitCreateCommentFlags.relFilePath, "file", "", "", "Relative path of the file to comment on")
 	commitCreateCommentCmd.Flags().StringVarP(&commitCreateCommentFlags.diffLineIndex, "diff-line-index", "", "", "Line index in the diff to comment on")
 
@@ -33,7 +34,14 @@ func init() {
 func commitCreateComment(cmd *cobra.Command, args []string) {
 	var diffLineIdx int
 
-	if len(commitCreateCommentFlags.diffLineIndex) != 0 {
+	if commitCreateCommentFlags.commentFile.Path() == "" {
+		printErrln("--comment-file parameter is required")
+		os.Exit(1)
+	}
+
+	content := mustReadFilePathFlagContentString(&commitCreateCommentFlags.commentFile)
+
+	if commitCreateCommentFlags.diffLineIndex != "" {
 		var err error
 
 		diffLineIdx, err = strconv.Atoi(commitCreateCommentFlags.diffLineIndex)
@@ -51,7 +59,7 @@ func commitCreateComment(cmd *cobra.Command, args []string) {
 		rootCfg.repository,
 		commitFlags.commit,
 		&github.RepositoryComment{
-			Body:     &commitCreateCommentFlags.comment,
+			Body:     &content,
 			Path:     &commitCreateCommentFlags.relFilePath,
 			Position: &diffLineIdx,
 		})
