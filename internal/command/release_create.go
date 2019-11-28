@@ -24,6 +24,7 @@ var releaseCreateFlags struct {
 
 func init() {
 	releaseCmd.AddCommand(releaseCreateCmd)
+
 	releaseCreateCmd.Flags().StringVarP(&releaseCreateFlags.tagName, "tag", "", "", "Git tag (required)")
 	releaseCreateCmd.Flags().StringVarP(&releaseCreateFlags.targetRef, "target", "", "", "Target branch or commit ID where the tag is created. If the tag already exist, it's ignored")
 	releaseCreateCmd.Flags().StringVarP(&releaseCreateFlags.name, "name", "", "", "The name of the release.")

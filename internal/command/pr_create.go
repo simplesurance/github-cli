@@ -24,6 +24,7 @@ var prCreateFlags struct {
 
 func init() {
 	prCmd.AddCommand(prCreateCmd)
+
 	prCreateCmd.Flags().StringVarP(&prCreateFlags.title, "title", "", "", "Pull-Request title (required)")
 	prCreateCmd.Flags().StringVarP(&prCreateFlags.branch, "branch", "", "", "Branch to merge (required)")
 	prCreateCmd.Flags().StringVarP(&prCreateFlags.baseBranch, "base-branch", "", "", "Name of the branch to merge into (required)")
