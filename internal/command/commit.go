@@ -14,5 +14,5 @@ var commitFlags struct {
 func init() {
 	rootCmd.AddCommand(commitCmd)
 
-	rootCmd.PersistentFlags().StringVarP(&commitFlags.commit, "commit", "", "", "Commit SHA (required)")
+	commitCmd.PersistentFlags().StringVarP(&commitFlags.commit, "commit", "", "", "Commit SHA (required)")
 }
